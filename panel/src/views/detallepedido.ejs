@@ -1,0 +1,74 @@
+<% layout('layouts/main') -%>
+
+    <section class="contenedor wrapper">
+        <h2 class="centrar-texto centrar">Detalle del pedido</h2>
+        <div class="contenido-panel">
+            <div class="datos-panel">
+                <h3>
+                    <%= pedido._usuario.nombre%>
+                </h3>
+                <h3>
+                    <%= pedido._usuario.cedula%>
+                </h3>
+                <h3>
+                    <%= pedido._usuario.email%>
+                </h3>
+                <h3>
+                    <%= pedido._usuario.telefono%>
+                </h3>
+                <div class="tabla">
+                    <table class="">
+                        <tr>
+                            <th><strong>Cantidad</strong></th>
+                            <th><strong>Producto</strong></th>
+                            <th><strong>Imagen</strong></th>
+                            <th><strong>V. Unitario</strong></th>
+                            <th><strong>Total</strong></th>
+                        </tr>
+
+                        <% if (detalles.length> 0) {%>
+                            <% for (let i=0; i<detalles.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <%= detalles[i].cantidad %>
+                                    </td>
+                                    <td>
+                                        <%= detalles[i]._producto.nombre%>
+                                    </td>
+                                    <td class="centrar">
+                                        <% if (detalles[i]._producto.foto.length !=null) {%>
+                                            <img src="<%= detalles[i]._producto.foto %>" height="50px" alt="">
+                                            <% }else { %>
+                                                SIN FOTO
+                                                <% } %>
+                                    </td>
+                                    <td>
+                                        $ <%= detalles[i]._producto.precio %>
+                                    </td>
+                                    <td >
+                                        <%= detalles[i].total %>
+                                    </td>
+                                </tr>
+
+                                <% } %>
+                                    <tr>
+                                        <td colspan="4">
+                                            <h4>Total por este pedido</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <%= pedido.total%>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <% }else { %>
+                                        <tr>
+                                            <td colspan="6">NO HAY REGISTROS</td>
+                                        </tr>
+                                        <% } %>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
