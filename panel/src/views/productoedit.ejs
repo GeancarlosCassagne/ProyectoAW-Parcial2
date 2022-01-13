@@ -1,0 +1,38 @@
+<% layout('layouts/main') -%>
+    <section class="contenedor wrapper">
+        <div id="main">
+            <fieldset>
+                <legend>DETALLES DEL PRODUCTO</legend>
+                <% if (producto) {%>
+                    <form action="/api/panel/productos/update/<%= producto.id %>" method="post">
+                        <label>Nombre</label>
+                        <input type="text" name="nombre" value="<%= producto.nombre %>" placeholder="Descripcion"
+                            required>
+                        <label>Precio</label>
+                        <input type="text" name="precio" value="<%= producto.precio %>" placeholder="0.00" required>
+                        <label>Categoria</label>
+                        <select name="_categoria" id="">
+                            <% if (categoria.length> 0) { %>
+                                <% for (let i=0; i<categoria.length; i++) { %>
+                                    <% if (producto._categoria == categoria[i].id) { %>
+                                        <option value="<%= categoria[i].id %>" selected> <%=categoria[i].descripcion %></option>
+                                        <%}else { %>
+                                        <option value="<%= categoria[i].id %>"> <%=categoria[i].descripcion %></option>
+                                    >
+                                    <%}}} %>
+                        </select>
+                        <label>Descripcion</label>
+                        <textarea name="descripcion"><%= producto.descripcion %></textarea>
+                        <label>Foto</label>
+                        <input type="text" value="<%= producto.foto %> name=" foto" required>
+                        <button type="submit" name="accion" value="Añadir"
+                            class="boton boton-verde enviar">Editar</button>
+                        <button class="boton boton-rojo" href="/api/panel/productos">Cancelar</button>
+                    </form>
+
+                    <% } %>
+
+
+            </fieldset>
+        </div>
+    </section>

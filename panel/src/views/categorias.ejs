@@ -1,0 +1,46 @@
+<% layout('layouts/main') -%>
+
+<section class="contenedor wrapper">
+    <div class="contenido-panel">
+        
+        <div class="datos-panel">
+            <div class="tabla tabla-categoria">
+                <div class="tabla-cat">
+                    <table class="">
+                        <tr>
+                            <th><strong></strong></th>
+                            <th><strong>Categoria</strong></th>
+                            <th><strong>Accion</strong></th>
+                        </tr>
+                        <% if (data.length > 0) { %>
+                            <% for (let i=0; i<data.length; i++) { %> 
+                                <tr>
+                                    <td><%= (i+1) %></td>
+                                    <td><%= data[i].descripcion %></td>
+                                    <td class="accion"><a class="a-eliminar" href="/api/panel/categorias/delete/<%= data[i].id %>"><i class="fas fa-trash-alt"></i></a></td>
+                                </tr>
+                            <% } %>   
+                        <% } else { %>
+                            <tr>
+                                <td colspan="3">NO HAY REGISTROS</td>
+                            </tr>
+                        <% } %>
+                        
+                    </table>
+                </div>
+                <div class="submit-cat">
+                    <fieldset>
+                        <legend>REGISTRAR NUEVA CATEGORIA</legend>
+                        <form method="post" action="/api/panel/categorias/add">
+                            <label>Descripcion</label>
+                            <input type="text" name="descripcion" placeholder="Descripcion" required>
+                            <button type="submit" name="accion" value="Añadir" class="boton boton-verde enviar">AGREGAR</button>
+                        </form>
+                    </fieldset>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
