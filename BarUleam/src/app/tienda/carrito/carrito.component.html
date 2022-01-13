@@ -1,0 +1,40 @@
+<section class="wrapper carrito">
+    <h2 class="centrar">CARRITO</h2>
+    <h2 class="centrar" *ngIf="productos.length == 0">El carrito esta vacio</h2>
+    <div class="contenedor-carrito" *ngIf="productos.length > 0">
+        <div class="contenedor-producto bg-gris blanco carrito-encabezado">
+            <div class="box">Imagen</div>
+            <div class="box detalle-p">Descripcion del producto</div>
+            <div class="box">Cantidad</div>
+            <div class="box">Precio</div>
+            <div class="box">Total</div>
+        </div>
+        <div class="bg-gris blanco carrito-encabezado2">
+            <div class="box">Detalles del pedido</div>
+        </div>
+        <div class="contenedor-carrito" id="lista-compra">
+            <div class="contenedor-producto bg-blanco" *ngFor="let producto of productos; ">
+                <div class="box">
+                    <img [src]="producto.foto" height=50>
+                </div>
+                <div class="box detalle-p">{{producto.nombre}}</div>
+                <div class="box canti">
+                    <input  type="number" class="pequeño cantidad" min="1" (change)="actualizar(producto._id,producto.cantidad)"  [(ngModel)]="producto.cantidad" required id="cantidad_p">
+                    <a  class="a-eliminar no-margin" title="Eliminar" (click)="eliminar(producto._id)"><i class="fas fa-trash-alt"></i></a>
+                </div>
+                <div class="box">$<span id="precio_u_p">{{producto.precio}}</span></div>
+                <div class="box" id="subtotales">$<span id="precio_total_p">{{(producto.precio * producto.cantidad).toFixed(2)}}</span> </div>
+            </div>
+        </div>
+        <div class="contenedor-carrito">
+            <div class="contenedor-total bg-blanco">
+                <div class="total">TOTAL POR ESTE PEDIDO:</div>
+                <div class="box">$<span id="total_carrito">{{total}}</span></div>
+            </div>
+        </div>
+        <div class="acciones">
+            <a (click)="vaciar()" class="boton boton-rojoc">Vaciar el carrito</a>
+            <a (click)="comprar()" class="boton boton-verde">Realizar pedido</a>
+        </div>
+    </div>
+</section>
